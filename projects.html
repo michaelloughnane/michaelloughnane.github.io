@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — projects</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html">home</a>
+  <a href="about.html">about</a>
+  <a href="projects.html" class="active">projects</a>
+  <a href="experience.html">experience</a>
+  <a href="contact.html">contact</a>
+</nav>
+
+<hr>
+
+<main>
+  <h2>projects</h2>
+  
+  <details>
+    <summary>REFRA-SOS</summary>
+    <details> 
+      <summary>What it does</summary>
+      <p>
+        REFRA-SOS is a project investigating the use of social media data as an alternate data source for
+        modeling real-time natural disasters, and predicting their future evolution, beyond traditional satellite imagery solutions. The project website can be
+        found <a href="https://sites.google.com/view/refra-sos/" target="_blank">here</a>.
+      </p>
+    </details>
+    <details> 
+      <summary>My role</summary>
+      <p>
+        I've been the primary lead for this project. REFRA-SOS was a largely dormant initiative since 2023 until I took it over in 2025.
+        Since then, I've defined the broad short- and long- term vision for the project, lead recruitment and development, and
+        prepared the project for its academic launch at the <a href="https://www.iafastro.org/events/global-series-conferences/the-iaf-global-space-conference-on-climate-change-2026/" target="_blank">IAF GLOC 2026 conference</a>.
+      </p>
+    </details>
+  </details>
+
+  <details>
+    <summary>GIS-PHNRA</summary>
+    <details> 
+      <summary>What it does</summary>
+      <p>
+        GIS-PHNRA is a survey project levaraging both on-the-ground census-taking and remote satellite imagery to 
+        create a comprehensive analysis of pre- and post-natal care in East Africa. The project intends to both create an
+        accessible database for improving awareness of resources available in the region, as well as lead to policy recommendations
+        for local governments and decision-makers in the region. The project expects to publish its first report in late 2026.
+      </p>
+    </details>
+    <details> 
+      <summary>My role</summary>
+      <p>
+        I've served as a project manager and international coordinator for this project since the beginning of 2026. I've coordinated
+        with the local Nairobi-based team to help define and adhere to project goals and timelines, and helped recruit interantional 
+        volunteers to assist with data collection and analysis.
+      </p>
+    </details>
+  
+  </details>
+
+  <details>
+    <summary>The Big Awards</summary>
+    <details> 
+      <summary>What it is</summary>
+      <p>
+        The Big Awards is a recurring web series commissioned by the content creator 
+        <a href="https://www.youtube.com/@AtriocClips" target="_blank">Atrioc</a>,
+        host of politics and economics show 
+        <a href="https://en.wikipedia.org/wiki/Lemonade_Stand_(podcast)" target="_blank">Lemonade Stand</a>. 
+        It's a lighthearted comedy series in which various high-profile associates of Atrioc, alongside his community of
+        fans, present faux "awards" commemorating highlights from the prior year of content. Collectively, the 
+        series has garnered over a million views across various platforms, ranging from YouTube videos to short-form video posts.
+      </p>
+    </details>
+    <details> 
+      <summary>My role</summary>
+      <p>
+        I've served in a series of roles since this project's inception, ultimately serving as the overall director for the 
+        most recent iteration of the show. This involved overseeing a 50-person team of volunteers, coordinating the production process,
+        defining the creative vision for the show, and liasing with Atrioc and associated stakeholders to ensure the overall success of
+        the project.
+      </p>
+    </details>
+  
+  </details>
+
+  <!-- Copy an <article> block to add more projects -->
+
+</main>
+
+<hr>
+
+<footer>
+  <p>Michael Loughnane &ndash; &copy; 2026</p>
+</footer>
+
+</body>
+</html>
+
+<script>
+  function closeWithAnimation(el, onDone) {
+    const content = el.querySelectorAll(':scope > *:not(summary)');
+    content.forEach(node => node.style.animation = 'collapse 0.2s ease-in forwards');
+    setTimeout(() => {
+      el.open = false;
+      content.forEach(node => node.style.animation = '');
+      if (onDone) onDone();
+    }, 200);
+  }
+
+  function closeSiblingsThenParent(el, onDone) {
+  const openChildren = [...el.querySelectorAll(':scope > details[open]')];
+
+  if (openChildren.length === 0) {
+    closeWithAnimation(el, onDone);
+    return;
+  }
+
+  // close children one at a time, each waiting for the previous to finish
+  function closeNext(i) {
+    if (i >= openChildren.length) {
+      closeWithAnimation(el, onDone);
+      return;
+    }
+    closeWithAnimation(openChildren[i], () => {
+      setTimeout(() => closeNext(i + 1), 300);
+    });
+  }
+
+  closeNext(0);
+}
+  // open/close individual details on hover as before
+  document.querySelectorAll('details').forEach(el => {
+    el.addEventListener('mouseenter', () => el.open = true);
+    el.addEventListener('click', e => { if (!e.target.closest('a')) e.preventDefault(); });
+  });
+
+  // but only start the close timer when leaving the container entirely
+  let closeTimer;
+  const container = document.querySelector('main');
+
+  container.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(() => {
+      document.querySelectorAll('main > details[open]').forEach(el => {
+        closeSiblingsThenParent(el);
+      });
+    }, 1000);
+  });
+
+  container.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+</script>

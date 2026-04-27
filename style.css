@@ -1,0 +1,166 @@
+/* intentionally minimal. this is a choice. */
+
+:root {
+  --text: #111;
+  --dim:  #666;
+  --bg:   #fff;
+  --max:  640px;
+  --accent: #444;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #ddd;
+    --dim:  #888;
+    --bg:   #111;
+    --accent: #aaa;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+details {
+  margin-left: 1.25rem;
+  font-size: 0.9em;
+}
+
+/* top-level details shouldn't be indented */
+main > details {
+  margin-left: 0;
+  font-size: 1em;
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+nav a.active {
+  text-decoration: none;
+  color: var(--dim);
+  pointer-events: none;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: normal;
+  margin-bottom: 0.4rem;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--dim);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--text);
+  margin: 2rem 0;
+}
+
+p {
+  margin-bottom: 0.75rem;
+}
+
+article {
+  margin-bottom: 1.5rem;
+}
+
+ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.35rem 0.75rem 0.35rem 0;
+  vertical-align: top;
+  border-bottom: 1px solid currentColor;
+  opacity: 0.85;
+}
+
+th {
+  width: 110px;
+  color: var(--dim);
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+.meta {
+  font-weight: normal;
+  color: var(--dim);
+  font-size: 0.85rem;
+}
+
+footer {
+  color: var(--dim);
+  font-size: 0.85rem;
+}
+
+details summary {
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+details > *:not(summary) {
+  animation: collapse 0.2s ease-in forwards;
+}
+
+details[open] > *:not(summary) {
+  animation: expand 0.2s ease-out forwards;
+}
+
+@keyframes expand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes collapse {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-4px); }
+}
