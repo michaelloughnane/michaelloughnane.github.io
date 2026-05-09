@@ -134,25 +134,22 @@ permalink: /projects
 
   closeNext(0);
 }
-  // open/close individual details on hover as before
-  document.querySelectorAll('details').forEach(el => {
-    el.addEventListener('mouseenter', () => el.open = true);
-    el.addEventListener('click', e => { if (!e.target.closest('a')) e.preventDefault(); });
-  });
-
-  // but only start the close timer when leaving the container entirely
-  let closeTimer;
   const container = document.querySelector('main');
 
-  container.addEventListener('mouseleave', () => {
-    closeTimer = setTimeout(() => {
-      document.querySelectorAll('main > details[open]').forEach(el => {
-        closeSiblingsThenParent(el);
-      });
-    }, 1000);
-  });
+  document.querySelectorAll('details').forEach(el => {
+    el.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      e.preventDefault();
+      if (e.target.closest('details') !== el) return;
+      if (!e.target.closest('summary')) return;
 
-  container.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+      if (el.open) {
+        closeSiblingsThenParent(el);
+      } else {
+        el.open = true;
+      }
+    });
+  });
 </script>
 </body>
 </html>
