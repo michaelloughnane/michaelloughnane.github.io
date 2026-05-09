@@ -27,7 +27,7 @@ permalink: /contact
   <p>
     Always happy to hear about new opportunities. <br> Reach me at
     <a href="mailto:michael@loughnane.com">michael@loughnane.com</a> 
-    <button class="copy-btn" onclick="copyEmail(this)">copy</button> .
+    <button class="copy-btn">copy</button> .
   </p>
   <p>
     <a href="https://github.com/michaelloughnane" target="_blank">github</a>
@@ -43,11 +43,11 @@ permalink: /contact
 </footer>
 
 <script>
-  function copyEmail(btn) {
+  document.querySelector('.copy-btn').addEventListener('click', function() {
     navigator.clipboard.writeText('michael@loughnane.com');
-    btn.textContent = 'copied!';
-    setTimeout(() => btn.textContent = 'copy', 2000);
-  }
+    this.textContent = 'copied!';
+    setTimeout(() => this.textContent = 'copy', 2000);
+  });
 </script>
 </body>
 </html>
