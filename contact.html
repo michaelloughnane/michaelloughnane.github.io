@@ -44,7 +44,7 @@ permalink: /contact
 
 <script>
   document.querySelector('.copy-btn').addEventListener('click', function() {
-    navigator.clipboard.writeText('michael@loughnane.com');
+    if (navigator.clipboard) navigator.clipboard.writeText('michael@loughnane.com').catch(() => {});
     this.textContent = 'copied!';
     setTimeout(() => this.textContent = 'copy', 2000);
   });
